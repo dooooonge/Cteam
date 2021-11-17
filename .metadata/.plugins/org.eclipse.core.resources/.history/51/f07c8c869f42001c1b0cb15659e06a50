@@ -1,0 +1,15 @@
+package member;
+
+import java.util.HashMap;
+
+public interface MemberService {
+	
+	MemberVO member_login(HashMap<String, String> map); //(select)
+	
+	void member_join(MemberVO vo);//(insert)
+	
+	void member_delete(int id);
+	
+	void member_update(MemberVO vo);
+	
+}

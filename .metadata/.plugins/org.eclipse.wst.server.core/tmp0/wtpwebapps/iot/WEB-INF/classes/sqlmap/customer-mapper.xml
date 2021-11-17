@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="customer.mapper">
+	
+	<!-- 고객 정보 삭제 -->
+	<delete id="delete">
+		delete from customer
+		where id = #{id}
+	</delete>
+	
+	<!-- 고객 정보 수정 -->
+	
+	<update id="update">
+		update customer set gender=#{gender}, email=#{email}, phone=#{phone}
+		where id = #{id}
+	</update>
+	
+	<!-- 신규 고객 등록 -->
+	<insert id="insert">
+		insert into customer (name, gender, email, phone)
+		values ( #{name}, #{gender}, #{email}, #{phone} )
+	</insert>
+	
+	<!-- 해당 고객의 상세 정보 조회 -->
+	<select id="detail" resultType="customer.CustomerVO">
+		select * from customer
+		where id = #{id}
+	</select>
+	
+	
+	<!-- 전체 고객 정보 조회 -->
+	<!-- ROWNUM : 테이블에 존재하는 컬럼은 아니지만, 사용할 수 있는 가짜 컬럼
+			데이터를 추가할 때 매겨지는 번호이기에 order by 절을 사용해 정렬해도 유지됨
+	서브쿼리에서 먼저 정렬한 후 메인 쿼리에서 순번 매기기 쿼리문의 결과로 나온 각 행의 순서값 -->
+	<select id="list" resultType="customer.CustomerVO">
+		select rownum no, c.* from (select * from customer order by name) c
+	</select>
+	
+</mapper>

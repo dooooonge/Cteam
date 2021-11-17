@@ -1,0 +1,85 @@
+package member;
+
+public class MemberVO {
+    private String ID, NICKNAME, PASSWORD, ADDRESS, EMAIL, IDNUMBER, FILENAME, NAME;
+
+	public MemberVO(String iD, String nICKNAME, String pASSWORD, String aDDRESS, String eMAIL, String iDNUMBER,
+			String fILENAME, String nAME) {
+		super();
+		ID = iD;
+		NICKNAME = nICKNAME;
+		PASSWORD = pASSWORD;
+		ADDRESS = aDDRESS;
+		EMAIL = eMAIL;
+		IDNUMBER = iDNUMBER;
+		FILENAME = fILENAME;
+		NAME = nAME;
+	}
+	//로그인 할 때 암호 없이 멤버 정보 가져올 때
+	public MemberVO(String iD, String nICKNAME, String aDDRESS, String eMAIL, String iDNUMBER, String fILENAME,
+			String nAME) {
+		super();
+		ID = iD;
+		NICKNAME = nICKNAME;
+		ADDRESS = aDDRESS;
+		EMAIL = eMAIL;
+		IDNUMBER = iDNUMBER;
+		FILENAME = fILENAME;
+		NAME = nAME;
+	}
+	public String getID() {
+		return ID;
+	}
+	public void setID(String iD) {
+		ID = iD;
+	}
+	public String getNICKNAME() {
+		return NICKNAME;
+	}
+	public void setNICKNAME(String nICKNAME) {
+		NICKNAME = nICKNAME;
+	}
+	public String getPASSWORD() {
+		return PASSWORD;
+	}
+	public void setPASSWORD(String pASSWORD) {
+		PASSWORD = pASSWORD;
+	}
+	public String getADDRESS() {
+		return ADDRESS;
+	}
+	public void setADDRESS(String aDDRESS) {
+		ADDRESS = aDDRESS;
+	}
+	public String getEMAIL() {
+		return EMAIL;
+	}
+	public void setEMAIL(String eMAIL) {
+		EMAIL = eMAIL;
+	}
+	public String getIDNUMBER() {
+		return IDNUMBER;
+	}
+	public void setIDNUMBER(String iDNUMBER) {
+		IDNUMBER = iDNUMBER;
+	}
+	public String getFILENAME() {
+		return FILENAME;
+	}
+	public void setFILENAME(String fILENAME) {
+		FILENAME = fILENAME;
+	}
+	public String getNAME() {
+		return NAME;
+	}
+	public void setNAME(String nAME) {
+		NAME = nAME;
+	}
+
+    
+
+	
+    
+    
+    
+}
