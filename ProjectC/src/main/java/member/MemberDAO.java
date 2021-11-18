@@ -93,6 +93,7 @@ public class MemberDAO implements MemberService{
 
 		@Override
 		public int member_join(MemberVO vo) {
+			System.out.println(vo.getId());
 			return sql.insert("member.mapper.member_join", vo);
 		}
 

@@ -66,7 +66,7 @@ public class AnController {
 		//MultipartRequest multi1 = (MultipartRequest)req;
 		//MultipartFile file1 = multi1.getFile("filename");
 		MemberVO vo = new MemberVO();
-		vo.setId(idnumber);
+		vo.setId(id);
 		vo.setPassword(password);
 		vo.setAddress(address);
 		vo.setEmail(email);
@@ -97,12 +97,10 @@ public class AnController {
 					file.transferTo(new File(realImgPath, filename));
 				} catch (Exception e) {
 					e.getMessage();
-				} 
-				
+				} 	
 			}
-			
 		}}
-		
+		vo.setFilename(filename);
 		int succ = service.member_join(vo);
 		
 		PrintWriter out;
