@@ -59,18 +59,25 @@ public class AnController {
 		String email = req.getParameter("email");
 		String idnumber = req.getParameter("idnumber");
 		String filename = req.getParameter("filename");
-		String address = req.getParameter("address");
+		String address = req.getParameter("address");		
 		// 2. 찍어봅시다
 		System.out.println(id + ", " + password + ", " + name + ", " 
-				+ nickname + ", " + email +", "+idnumber+", "+filename+", "+address );
-
-		MemberVO vo = new MemberVO(id, nickname, password, address,
-				email, idnumber, name, filename);
-		
+				+ nickname + ", " + email + ", " + idnumber + ", " + filename +", "+ address );
+		//MultipartRequest multi1 = (MultipartRequest)req;
+		//MultipartFile file1 = multi1.getFile("filename");
+		MemberVO vo = new MemberVO();
+		vo.setId(idnumber);
+		vo.setPassword(password);
+		vo.setAddress(address);
+		vo.setEmail(email);
+		vo.setFilename(filename);
+		vo.setIdnumber(idnumber);
+		vo.setName(name);
+		vo.setNickname(nickname);
 					
 		// 3. 안드로이드에서 보낸 파일 받기 : 파일을 보낸 경우에만 실행
-		// 파일이름만 저장해 놓고 안드로이드에서 받아서 전체 경로를 완성한다
-		
+		// 파일이름만 저장해 놓고 안드로이드에서 받아서 전체 경로를 완성한다   
+		if(filename==null || filename.equals("") ) {
 		MultipartRequest multi = (MultipartRequest)req;
 		MultipartFile file = multi.getFile("filename");
 		
@@ -94,7 +101,7 @@ public class AnController {
 				
 			}
 			
-		}
+		}}
 		
 		int succ = service.member_join(vo);
 		
@@ -107,11 +114,7 @@ public class AnController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		// 응답을 위해 views에서 anJoin.jsp를 찾아 실행한다.
-		
-		
+				
 	}
 	
 	@ResponseBody

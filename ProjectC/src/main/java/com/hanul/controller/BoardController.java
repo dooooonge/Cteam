@@ -23,8 +23,8 @@ public class BoardController {
 	@Autowired BoardServiceImpl service;
 	
 	@Scheduled(cron = "* * * 14 * *")
-	@RequestMapping("/DBUpdate")
-	public String update() {
+	@RequestMapping("/DB_Update")
+	public String Board_DB_Update() {
 		 
 		service.board_clear();
 		// json = key, value로 나누어진 데이터 자료 구조

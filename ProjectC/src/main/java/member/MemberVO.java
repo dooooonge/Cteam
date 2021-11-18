@@ -5,6 +5,13 @@ public class MemberVO {
     private String id, nickname, password, address, email, idnumber, filepath, filename, name, kind, joindate;
 
     
+    
+	public MemberVO() {
+		super();
+	}
+
+
+
 	public MemberVO(String id, String nickname, String password, String address, String email, String idnumber,
 			String filepath, String filename, String name, String kind, String joindate) {
 		super();

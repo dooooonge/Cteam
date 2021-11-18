@@ -19,7 +19,7 @@
 	</select>
 	
 	<insert id="member_join">
-		insert into member(id, password, name, nickname, email, idnumber, address, filename)
+		insert into member(id, password, name, nickname, email, idnumber, address, filepath)
 		values(#{id}, #{password}, #{name}, #{nickname}, #{email}, #{idnumber}, #{address} ,#{filename, jdbcType=VARCHAR})
 	</insert>
 </mapper>
