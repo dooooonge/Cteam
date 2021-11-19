@@ -65,8 +65,7 @@ public class MemberDAO implements MemberService{
 			
 			ArrayList<MemberVO> dtos = new ArrayList<MemberVO>();
 			for(int i = 0; i < list.size(); i++){
-			dtos.add(new MemberVO(list.get(i).getId()
-					,list.get(i).getNickname()
+			dtos.add(new MemberVO(list.get(i).getNickname()
 					,list.get(i).getPassword()
 					,list.get(i).getAddress()
 					,list.get(i).getEmail()
@@ -93,7 +92,7 @@ public class MemberDAO implements MemberService{
 
 		@Override
 		public int member_join(MemberVO vo) {
-			System.out.println(vo.getId());
+			System.out.println(vo.getEmail());
 			return sql.insert("member.mapper.member_join", vo);
 		}
 

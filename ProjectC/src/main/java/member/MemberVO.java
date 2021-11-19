@@ -2,7 +2,7 @@ package member;
 
 
 public class MemberVO {
-    private String id, nickname, password, address, email, idnumber, filepath, filename, name, kind, joindate;
+    private String  nickname, password, address, email, idnumber, filepath, filename, name, kind, joindate;
 
     
     
@@ -12,10 +12,10 @@ public class MemberVO {
 
 
 
-	public MemberVO(String id, String nickname, String password, String address, String email, String idnumber,
+	public MemberVO(String nickname, String password, String address, String email, String idnumber,
 			String filepath, String filename, String name, String kind, String joindate) {
 		super();
-		this.id = id;
+		
 		this.nickname = nickname;
 		this.password = password;
 		this.address = address;
@@ -30,10 +30,9 @@ public class MemberVO {
 
 
 
-	public MemberVO(String id, String nickname, String password,
+	public MemberVO(String nickname, String password,
 			String address, String email, String idnumber, String name, String filename) {
 		super();
-		this.id = id;
 		this.nickname = nickname;
 		this.password = password;
 		this.address = address;
@@ -43,15 +42,6 @@ public class MemberVO {
 		this.name = name;
 	}
 
-
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getNickname() {
 		return nickname;

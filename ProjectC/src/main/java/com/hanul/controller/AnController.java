@@ -52,46 +52,41 @@ public class AnController {
 		System.out.println("anJoin");
 		
 		// 1. 안드로이드에서 보낸 데이터를 req로 받아서 변수에 저장
-		String id = req.getParameter("id");
+		String email = req.getParameter("email");
 		String password = req.getParameter("password");
 		String name = req.getParameter("name");
-		String nickname = req.getParameter("nickname");
-		String email = req.getParameter("email");
-		String idnumber = req.getParameter("idnumber");
 		String filename = req.getParameter("filename");
+		String nickname = req.getParameter("nickname");
+		String idnumber = req.getParameter("idnumber");
 		String address = req.getParameter("address");		
 		// 2. 찍어봅시다
-		System.out.println(id + ", " + password + ", " + name + ", " 
-				+ nickname + ", " + email + ", " + idnumber + ", " + filename +", "+ address );
+		System.out.println(email + ", " + password + ", " + name + ", " 
+				+ nickname + ", " + idnumber + ", " + address );
 		//MultipartRequest multi1 = (MultipartRequest)req;
 		//MultipartFile file1 = multi1.getFile("filename");
 		MemberVO vo = new MemberVO();
-		vo.setId(id);
+		vo.setEmail(email);
 		vo.setPassword(password);
 		vo.setAddress(address);
-		vo.setEmail(email);
-		vo.setFilename(filename);
 		vo.setIdnumber(idnumber);
 		vo.setName(name);
 		vo.setNickname(nickname);
-					
+		
 		// 3. 안드로이드에서 보낸 파일 받기 : 파일을 보낸 경우에만 실행
 		// 파일이름만 저장해 놓고 안드로이드에서 받아서 전체 경로를 완성한다   
+		String realImgPath = "";
 		if(filename==null || filename.equals("") ) {
 		MultipartRequest multi = (MultipartRequest)req;
 		MultipartFile file = multi.getFile("filename");
-		
 		if(file != null) {
 			filename = file.getOriginalFilename();
 			System.out.println("fileName : " + filename);
 			
 			if(file.getSize() > 0) {
-				String realImgPath = req.getSession().getServletContext()
+				realImgPath = req.getSession().getServletContext()
 						.getRealPath("/resources/");
-				
 				System.out.println("realpath : " + realImgPath);
 				System.out.println("fileSize : " + file.getSize());
-				
 				// 이미지 파일을 서버에 저장
 				try {
 					file.transferTo(new File(realImgPath, filename));
@@ -100,7 +95,7 @@ public class AnController {
 				} 	
 			}
 		}}
-		vo.setFilename(filename);
+		vo.setFilepath(realImgPath+filename);
 		int succ = service.member_join(vo);
 		
 		PrintWriter out;
@@ -117,7 +112,7 @@ public class AnController {
 	
 	@ResponseBody
 	@RequestMapping(value="/anLogin", method = {RequestMethod.GET, RequestMethod.POST})
-	public void anLogin(String id, String pw, Model model, HttpServletResponse response) {
+	public void anLogin(String email, String pw, Model model, HttpServletResponse response) {
 		
 		System.out.println("anLogin");
 		
@@ -128,13 +123,13 @@ public class AnController {
 		 */
 		
 		// 2. 찍어봅시다
-		System.out.println(id + ", " + pw );
+		System.out.println(email + ", " + pw );
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("id", id);
+		map.put("email", email);
 		map.put("pw", pw);
 		
 		MemberVO vo =  service.member_login(map);
-		System.out.println(vo.getId()+"조회 완료");
+		System.out.println(vo.getEmail()+"조회 완료");
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(vo);
