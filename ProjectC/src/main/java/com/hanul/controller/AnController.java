@@ -21,17 +21,18 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 
-import member.MemberServiceImpl;
-import member.MemberVO;
+import gw_member.MemberServiceImpl_GW;
+import gw_member.MemberVO_GW;
 
 @Controller
 public class AnController {
 	
-	@Autowired MemberServiceImpl service;
+	@Autowired MemberServiceImpl_GW service;
 	
 	@RequestMapping("/anIdCheck")
-	public void anIdCheck(String id, HttpServletResponse response) {
-		int chk = service.member_id_chk(id);
+	public void anIdCheck(String email, HttpServletResponse response) {
+		System.out.println("emailCheck");
+		int chk = service.member_id_chk(email);
 		
 		
 		PrintWriter out;
@@ -64,7 +65,7 @@ public class AnController {
 				+ nickname + ", " + idnumber + ", " + address );
 		//MultipartRequest multi1 = (MultipartRequest)req;
 		//MultipartFile file1 = multi1.getFile("filename");
-		MemberVO vo = new MemberVO();
+		MemberVO_GW vo = new MemberVO_GW();
 		vo.setEmail(email);
 		vo.setPassword(password);
 		vo.setAddress(address);
@@ -128,7 +129,7 @@ public class AnController {
 		map.put("email", email);
 		map.put("pw", pw);
 		
-		MemberVO vo =  service.member_login(map);
+		MemberVO_GW vo =  service.member_login(map);
 		System.out.println(vo.getEmail()+"조회 완료");
 		
 		Gson gson = new Gson();
@@ -153,7 +154,7 @@ public class AnController {
 	@RequestMapping(value="/anSelectMember", method = {RequestMethod.GET, RequestMethod.POST})
 	public void anSelectMember(HttpServletRequest req, Model model, HttpServletResponse response) {
 		System.out.println("anSelectMember");
-		List<MemberVO> dtos = service.member_list();
+		List<MemberVO_GW> dtos = service.member_list();
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(dtos);

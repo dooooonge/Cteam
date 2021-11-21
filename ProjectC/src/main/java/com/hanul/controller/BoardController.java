@@ -14,13 +14,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import board.BoardServiceImpl;
-import board.BoardVO;
+import board.BoardServiceImpl_GW;
+import board.BoardVO_GW;
 
 @Controller
 public class BoardController {
 	
-	@Autowired BoardServiceImpl service;
+	@Autowired BoardServiceImpl_GW service;
 	
 	@Scheduled(cron = "* * * 14 * *")
 	@RequestMapping("/DB_Update")
@@ -36,7 +36,7 @@ public class BoardController {
 		String url = "http://api.data.go.kr/openapi/tn_pubr_public_pblprfr_event_info_api";
 		// ?=&perPage=10&serviceKey=
 		//?pageNo=1&numOfRows=100&type=json&ServiceKey=
-		ArrayList<BoardVO> list = new ArrayList<>();
+		ArrayList<BoardVO_GW> list = new ArrayList<>();
 		String jsonData ="";
 
 		try {
@@ -74,7 +74,7 @@ public class BoardController {
 				
 				JSONObject jsonDTO = (JSONObject) ArrayJson.get(i);
 				
-				BoardVO BoardVO = new BoardVO(
+				BoardVO_GW BoardVO = new BoardVO_GW(
 						jsonDTO.get("eventNm").toString(),
 						jsonDTO.get("opar").toString(),
 						jsonDTO.get("eventCo").toString(),
@@ -133,7 +133,7 @@ public class BoardController {
 						
 						JSONObject jsonDTO = (JSONObject) ArrayJson.get(i);
 						
-						BoardVO BoardVO = new BoardVO(
+						BoardVO_GW BoardVO = new BoardVO_GW(
 								jsonDTO.get("eventNm").toString(),
 								jsonDTO.get("opar").toString(),
 								jsonDTO.get("eventCo").toString(),
