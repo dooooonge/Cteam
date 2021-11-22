@@ -5,39 +5,99 @@ public class BoardVO_GW {
 	private String eventNm, opar, eventCo, eventStartDate, eventEndDate, eventStartTime, eventEndTime,
 	chrgeInfo, mnnst, auspcInstt, phoneNumber, suprtInstt, seatNumber, admfee, entncAge,
 	dscntInfo, atpn, homepageUrl, advantkInfo, prkplceYn, rdnmadr, lnmadr, latitude, longitude,
-	referenceDate, instt_code, instt_nm;
+	referenceDate,filename,filepath, postdate, writer;
+	private int no,post_able, readcnt,on_offline;
 	
-	public BoardVO_GW(String eventNm, String opar, String eventCo, String eventStartDate, String eventEndDate,
-			String eventStartTime, String eventEndTime, String chrgeInfo, String mnnst, String auspcInstt,
-			String phoneNumber, String suprtInstt, String seatNumber, String admfee, String entncAge, String dscntInfo,
-			String atpn, String homepageUrl, String advantkInfo, String prkplceYn, String rdnmadr, String lnmadr,
-			String latitude, String longitude, String referenceDate) {
-		super();
-		this.eventNm = eventNm;
-		this.opar = opar;
-		this.eventCo = eventCo;
-		this.eventStartDate = eventStartDate;
-		this.eventEndDate = eventEndDate;
-		this.eventStartTime = eventStartTime;
-		this.eventEndTime = eventEndTime;
-		this.chrgeInfo = chrgeInfo;
-		this.mnnst = mnnst;
-		this.auspcInstt = auspcInstt;
-		this.phoneNumber = phoneNumber;
-		this.suprtInstt = suprtInstt;
-		this.seatNumber = seatNumber;
-		this.admfee = admfee;
-		this.entncAge = entncAge;
-		this.dscntInfo = dscntInfo;
-		this.atpn = atpn;
-		this.homepageUrl = homepageUrl;
-		this.advantkInfo = advantkInfo;
-		this.prkplceYn = prkplceYn;
-		this.rdnmadr = rdnmadr;
-		this.lnmadr = lnmadr;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.referenceDate = referenceDate;
+	public String getFilename() {
+		return filename;
+	}
+
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+
+
+	public String getFilepath() {
+		return filepath;
+	}
+
+
+
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
+
+
+
+	public String getPostdate() {
+		return postdate;
+	}
+
+
+
+	public void setPostdate(String postdate) {
+		this.postdate = postdate;
+	}
+
+
+
+	public String getWriter() {
+		return writer;
+	}
+
+
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+
+
+
+	public int getNo() {
+		return no;
+	}
+
+
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+
+
+	public int getPost_able() {
+		return post_able;
+	}
+
+
+
+	public void setPost_able(int post_able) {
+		this.post_able = post_able;
+	}
+
+
+
+	public int getReadcnt() {
+		return readcnt;
+	}
+
+
+
+	public void setReadcnt(int readcnt) {
+		this.readcnt = readcnt;
+	}
+
+
+
+	public int getOn_offline() {
+		return on_offline;
+	}
+
+	public void setOn_offline(int on_offline) {
+		this.on_offline = on_offline;
 	}
 
 	public String getEventNm() {
@@ -240,21 +300,6 @@ public class BoardVO_GW {
 		this.referenceDate = referenceDate;
 	}
 
-	public String getInstt_code() {
-		return instt_code;
-	}
-
-	public void setInstt_code(String instt_code) {
-		this.instt_code = instt_code;
-	}
-
-	public String getInstt_nm() {
-		return instt_nm;
-	}
-
-	public void setInstt_nm(String instt_nm) {
-		this.instt_nm = instt_nm;
-	}
 	
 	
 }

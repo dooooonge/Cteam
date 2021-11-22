@@ -19,13 +19,13 @@ public class MemberDAO_GW implements MemberService_GW{
 		//8. 로그인 : anLoginCommand에서 값을 넘겨받는다
 		public MemberVO_GW member_login(HashMap<String, String> map) {
 			
-			return sql.selectOne("member.mapper.login_app", map);
+			return sql.selectOne("member_gw.mapper.login_app", map);
 		}
 		
 		
 		//회원전체 정보 가져오기
 		public ArrayList<MemberVO_GW> member_list() {
-			List<MemberVO_GW> list =  sql.selectList("member.mapper.memberList_app");
+			List<MemberVO_GW> list =  sql.selectList("member_gw.mapper.memberList_app");
 			
 			ArrayList<MemberVO_GW> dtos = new ArrayList<MemberVO_GW>();
 			for(int i = 0; i < list.size(); i++){
@@ -35,10 +35,12 @@ public class MemberDAO_GW implements MemberService_GW{
 					,list.get(i).getEmail()
 					,list.get(i).getIdnumber()
 					,list.get(i).getFilepath()
-					,list.get(i).getFilename()
 					,list.get(i).getName()
-					,list.get(i).getKind()
+					,list.get(i).getType()
 					,list.get(i).getJoindate()
+					,list.get(i).getNaver()
+					,list.get(i).getKakao()
+					,list.get(i).getGoogle()
 					
 					));
 			}
@@ -49,7 +51,7 @@ public class MemberDAO_GW implements MemberService_GW{
 		public List<MemberVO_GW> anSelectMember() {
 			
 			// 데이터베이스와 연동하여 원하는 결과물을 얻는다.
-			List<MemberVO_GW> dtos = sql.selectList("member.mapper.memberList");
+			List<MemberVO_GW> dtos = sql.selectList("member_gw.mapper.memberList");
 			return dtos;
 			
 		}
@@ -75,7 +77,7 @@ public class MemberDAO_GW implements MemberService_GW{
 		@Override
 		public int member_id_chk(String email) {
 			// TODO Auto-generated method stub
-			return sql.selectOne("member.mapper.id_check_app", email);
+			return sql.selectOne("member_gw.mapper.id_check_app", email);
 		}
 
 		

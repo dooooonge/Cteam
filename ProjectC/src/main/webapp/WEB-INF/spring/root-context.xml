@@ -11,7 +11,7 @@
 
 	<import resource="classpath:data/*.xml" />
 	
-	<context:component-scan base-package="board, gw_member, common, gom_community, jy_notice, mj_member, qna" />
+	<context:component-scan base-package="es_board, board, gw_member, common, gm_community, jy_notice, mj_member, qna, member" />
 		
 </beans>
 

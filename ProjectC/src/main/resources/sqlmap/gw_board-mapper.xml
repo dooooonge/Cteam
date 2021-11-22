@@ -3,10 +3,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="board.mapper">
+<mapper namespace="gw_board.mapper">
 	<delete id="board_clear">
 		delete from board
-		
 	</delete>
 	
 	<insert id="board_insert">
@@ -14,4 +13,8 @@
 		values(#{eventNm}, #{opar}, #{eventCo}, #{eventStartDate}, #{eventEndDate}, #{eventStartTime}, #{eventEndTime}, #{chrgeInfo}, #{mnnst}, #{auspcInstt}, #{phoneNumber},
 			   #{suprtInstt}, #{seatNumber}, #{admfee}, #{entncAge}, #{dscntInfo}, #{atpn}, #{homepageUrl}, #{advantkInfo}, #{prkplceYn}, #{rdnmadr}, #{lnmadr}, #{latitude}, #{longitude}, #{referenceDate} )
 	</insert>
+	
+	<select id="board_list_gw" resultType="board.BoardVO_GW">
+		select * from board
+	</select>
 </mapper>

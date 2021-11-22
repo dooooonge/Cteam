@@ -2,7 +2,7 @@ package gw_member;
 
 
 public class MemberVO_GW {
-    private String  nickname, password, address, email, idnumber, filepath, filename, name, kind, joindate;
+    private String  nickname, password, address, email, idnumber, filepath, name, type, joindate, naver, kakao, google;
 
     
     
@@ -12,33 +12,35 @@ public class MemberVO_GW {
 
 
 
-	public MemberVO_GW(String nickname, String password, String address, String email, String idnumber,
-			String filepath, String filename, String name, String kind, String joindate) {
+	public MemberVO_GW(String nickname, String password, 
+			String address, String email, String idnumber, 
+			String filepath,
+			String name, String type, String joindate, String naver, 
+			String kakao, String google) {
 		super();
-		
 		this.nickname = nickname;
 		this.password = password;
 		this.address = address;
 		this.email = email;
 		this.idnumber = idnumber;
 		this.filepath = filepath;
-		this.filename = filename;
 		this.name = name;
-		this.kind = kind;
+		this.type = type;
 		this.joindate = joindate;
+		this.naver = naver;
+		this.kakao = kakao;
+		this.google = google;
 	}
 
 
-
 	public MemberVO_GW(String nickname, String password,
-			String address, String email, String idnumber, String name, String filename) {
+			String address, String email, String idnumber, String name) {
 		super();
 		this.nickname = nickname;
 		this.password = password;
 		this.address = address;
 		this.email = email;
 		this.idnumber = idnumber;
-		this.filename = filename;
 		this.name = name;
 	}
 
@@ -91,14 +93,6 @@ public class MemberVO_GW {
 		this.filepath = filepath;
 	}
 
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -107,12 +101,12 @@ public class MemberVO_GW {
 		this.name = name;
 	}
 
-	public String getKind() {
-		return kind;
+	public String gettype() {
+		return type;
 	}
 
-	public void setKind(String kind) {
-		this.kind = kind;
+	public void settype(String type) {
+		this.type = type;
 	}
 
 	public String getJoindate() {
@@ -122,6 +116,55 @@ public class MemberVO_GW {
 	public void setJoindate(String joindate) {
 		this.joindate = joindate;
 	}
+
+
+
+	public String getType() {
+		return type;
+	}
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+
+	public String getNaver() {
+		return naver;
+	}
+
+
+
+	public void setNaver(String naver) {
+		this.naver = naver;
+	}
+
+
+
+	public String getKakao() {
+		return kakao;
+	}
+
+
+
+	public void setKakao(String kakao) {
+		this.kakao = kakao;
+	}
+
+
+
+	public String getGoogle() {
+		return google;
+	}
+
+
+
+	public void setGoogle(String google) {
+		this.google = google;
+	}
     
+	
     
 }

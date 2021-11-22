@@ -15,7 +15,7 @@ public class FormController {
 	
 	@RequestMapping("member_login")
 	public String member() {
-		
+		System.out.println("member_login");
 		return "member/login";
 	}
 	

@@ -1,11 +1,12 @@
 package board;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
 
-@Service
 public interface BoardService_GW {
 	
 	public int board_insert(BoardVO_GW dto);
 	
 	public void board_clear();
+	
+	public List<BoardVO_GW> board_list();
 }
