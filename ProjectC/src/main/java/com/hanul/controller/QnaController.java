@@ -8,15 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import mj_member.MemberVO;
+import member.MemberVO;
+import qna.QnaDAO_MJ;
 import qna.QnaPage;
-import qna.QnaServiceImpl;
 import qna.QnaVO;
 
 @Controller
 public class QnaController {
 	
-	@Autowired private QnaServiceImpl service;
+	@Autowired private QnaDAO_MJ service;
 	@Autowired private QnaPage page;
 	
 	//답글 저장 처리 요청

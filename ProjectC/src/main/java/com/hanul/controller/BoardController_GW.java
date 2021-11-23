@@ -14,13 +14,13 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import board.BoardServiceImpl_GW;
-import board.BoardVO_GW;
+import board.BoardDAO_GW;
+import board.BoardVO;
 
 @Controller
 public class BoardController_GW {
 	
-	@Autowired BoardServiceImpl_GW service;
+	@Autowired BoardDAO_GW service;
 	
 	@Scheduled(cron = "* * * 14 * *")
 	@RequestMapping("/DB_Update")
@@ -36,7 +36,7 @@ public class BoardController_GW {
 		String url = "http://api.data.go.kr/openapi/tn_pubr_public_pblprfr_event_info_api";
 		// ?=&perPage=10&serviceKey=
 		//?pageNo=1&numOfRows=100&type=json&ServiceKey=
-		ArrayList<BoardVO_GW> list = new ArrayList<>();
+		ArrayList<BoardVO> list = new ArrayList<>();
 		String jsonData ="";
 
 		try {
@@ -74,36 +74,36 @@ public class BoardController_GW {
 				
 				JSONObject jsonDTO = (JSONObject) ArrayJson.get(i);
 				
-				BoardVO_GW vo = new BoardVO_GW();
-				
-					vo.setEventNm(jsonDTO.get("eventNm").toString());
-					vo.setOpar(jsonDTO.get("opar").toString());
-					vo.setEventCo(jsonDTO.get("eventCo").toString());
-					vo.setEventStartDate(jsonDTO.get("eventStartDate").toString());
-					vo.setEventEndDate(jsonDTO.get("eventEndDate").toString());
-					vo.setEventStartTime(jsonDTO.get("eventStartTime").toString());
-					vo.setEventEndTime(jsonDTO.get("eventEndTime").toString());
-					vo.setChrgeInfo(jsonDTO.get("chrgeInfo").toString());
-					vo.setMnnst(jsonDTO.get("mnnst").toString());
-					vo.setAuspcInstt(jsonDTO.get("auspcInstt").toString());
-					vo.setPhoneNumber(jsonDTO.get("phoneNumber").toString());
-					vo.setSuprtInstt(jsonDTO.get("suprtInstt").toString());
-					vo.setSeatNumber(jsonDTO.get("seatNumber").toString());
-					vo.setAdmfee(jsonDTO.get("admfee").toString());
-					vo.setEntncAge(jsonDTO.get("entncAge").toString());
-					vo.setDscntInfo(jsonDTO.get("dscntInfo").toString());
-					vo.setAtpn(jsonDTO.get("atpn").toString());
-					vo.setHomepageUrl(jsonDTO.get("homepageUrl").toString());
-					vo.setAdvantkInfo(jsonDTO.get("advantkInfo").toString());
-					vo.setPrkplceYn(jsonDTO.get("prkplceYn").toString());
-					vo.setRdnmadr(jsonDTO.get("rdnmadr").toString());	
-					vo.setLnmadr(jsonDTO.get("lnmadr").toString());
-					vo.setLatitude(jsonDTO.get("latitude").toString());
-					vo.setLongitude(jsonDTO.get("longitude").toString());
-					vo.setReferenceDate(jsonDTO.get("referenceDate").toString());
+				BoardVO vo = new BoardVO();
+
+				vo.setEventnm(jsonDTO.get("eventNm").toString());
+				vo.setOpar(jsonDTO.get("opar").toString());
+				vo.setEventco(jsonDTO.get("eventCo").toString());
+				vo.setEventstartdate(jsonDTO.get("eventStartDate").toString());
+				vo.setEventenddate(jsonDTO.get("eventEndDate").toString());
+				vo.setEventstarttime(jsonDTO.get("eventStartTime").toString());
+				vo.setEventendtime(jsonDTO.get("eventEndTime").toString());
+				vo.setChrgeinfo(jsonDTO.get("chrgeInfo").toString());
+				vo.setMnnst(jsonDTO.get("mnnst").toString());
+				vo.setAuspcinstt(jsonDTO.get("auspcInstt").toString());
+				vo.setPhonenumber(jsonDTO.get("phoneNumber").toString());
+				vo.setSuprtinstt(jsonDTO.get("suprtInstt").toString());
+				vo.setSeatnumber(jsonDTO.get("seatNumber").toString());
+				vo.setAdmfee(jsonDTO.get("admfee").toString());
+				vo.setEntncage(jsonDTO.get("entncAge").toString());
+				vo.setDscntinfo(jsonDTO.get("dscntInfo").toString());
+				vo.setAtpn(jsonDTO.get("atpn").toString());
+				vo.setHomepageurl(jsonDTO.get("homepageUrl").toString());
+				vo.setAdvantkinfo(jsonDTO.get("advantkInfo").toString());
+				vo.setPrkplceyn(jsonDTO.get("prkplceYn").toString());
+				vo.setRdnmadr(jsonDTO.get("rdnmadr").toString());	
+				vo.setLnmadr(jsonDTO.get("lnmadr").toString());
+				vo.setLatitude(jsonDTO.get("latitude").toString());
+				vo.setLongitude(jsonDTO.get("longitude").toString());
+				vo.setReferencedate(jsonDTO.get("referenceDate").toString());
 				
 				service.board_insert(vo);
-				System.out.println(vo.getEventStartDate()+"일 시작하는" +vo.getEventNm()+" DB저장 완료");
+				System.out.println(vo.getEventstartdate()+"일 시작하는" +vo.getEventnm()+" DB저장 완료");
 				Thread.sleep(200);
 				// ArrayList<memberDTO>list 쓰는거랑 똑같음
 			}}
@@ -133,36 +133,37 @@ public class BoardController_GW {
 						
 						JSONObject jsonDTO = (JSONObject) ArrayJson.get(i);
 						
-						BoardVO_GW vo = new BoardVO_GW();
+						BoardVO vo = new BoardVO();
 						
-						vo.setEventNm(jsonDTO.get("eventNm").toString());
+						vo.setEventnm(jsonDTO.get("eventNm").toString());
 						vo.setOpar(jsonDTO.get("opar").toString());
-						vo.setEventCo(jsonDTO.get("eventCo").toString());
-						vo.setEventStartDate(jsonDTO.get("eventStartDate").toString());
-						vo.setEventEndDate(jsonDTO.get("eventEndDate").toString());
-						vo.setEventStartTime(jsonDTO.get("eventStartTime").toString());
-						vo.setEventEndTime(jsonDTO.get("eventEndTime").toString());
-						vo.setChrgeInfo(jsonDTO.get("chrgeInfo").toString());
+						vo.setEventco(jsonDTO.get("eventCo").toString());
+						vo.setEventstartdate(jsonDTO.get("eventStartDate").toString());
+						vo.setEventenddate(jsonDTO.get("eventEndDate").toString());
+						vo.setEventstarttime(jsonDTO.get("eventStartTime").toString());
+						vo.setEventendtime(jsonDTO.get("eventEndTime").toString());
+						vo.setChrgeinfo(jsonDTO.get("chrgeInfo").toString());
 						vo.setMnnst(jsonDTO.get("mnnst").toString());
-						vo.setAuspcInstt(jsonDTO.get("auspcInstt").toString());
-						vo.setPhoneNumber(jsonDTO.get("phoneNumber").toString());
-						vo.setSuprtInstt(jsonDTO.get("suprtInstt").toString());
-						vo.setSeatNumber(jsonDTO.get("seatNumber").toString());
+						vo.setAuspcinstt(jsonDTO.get("auspcInstt").toString());
+						vo.setPhonenumber(jsonDTO.get("phoneNumber").toString());
+						vo.setSuprtinstt(jsonDTO.get("suprtInstt").toString());
+						vo.setSeatnumber(jsonDTO.get("seatNumber").toString());
 						vo.setAdmfee(jsonDTO.get("admfee").toString());
-						vo.setEntncAge(jsonDTO.get("entncAge").toString());
-						vo.setDscntInfo(jsonDTO.get("dscntInfo").toString());
+						vo.setEntncage(jsonDTO.get("entncAge").toString());
+						vo.setDscntinfo(jsonDTO.get("dscntInfo").toString());
 						vo.setAtpn(jsonDTO.get("atpn").toString());
-						vo.setHomepageUrl(jsonDTO.get("homepageUrl").toString());
-						vo.setAdvantkInfo(jsonDTO.get("advantkInfo").toString());
-						vo.setPrkplceYn(jsonDTO.get("prkplceYn").toString());
+						vo.setHomepageurl(jsonDTO.get("homepageUrl").toString());
+						vo.setAdvantkinfo(jsonDTO.get("advantkInfo").toString());
+						vo.setPrkplceyn(jsonDTO.get("prkplceYn").toString());
 						vo.setRdnmadr(jsonDTO.get("rdnmadr").toString());	
 						vo.setLnmadr(jsonDTO.get("lnmadr").toString());
 						vo.setLatitude(jsonDTO.get("latitude").toString());
 						vo.setLongitude(jsonDTO.get("longitude").toString());
-						vo.setReferenceDate(jsonDTO.get("referenceDate").toString());
+						vo.setReferencedate(jsonDTO.get("referenceDate").toString());
 						
 						service.board_insert(vo);
-						System.out.println(vo.getEventStartDate()+"일 시작하는" +vo.getEventNm()+" DB저장 완료");
+						System.out.println(vo.getEventstartdate()+"일 시작하는" +vo.getEventnm()+" DB저장 완료");
+
 						Thread.sleep(200);
 						// ArrayList<memberDTO>list 쓰는거랑 똑같음
 					}}

@@ -17,28 +17,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
-import es_board.ES_BoardSeriveImpl;
-import es_board.ES_BoardVO;
-import gm_community.CommunityVO;
-import gw_member.MemberVO_GW;
+import board.BoardDAO_ES;
+import board.BoardVO;
 
 @Controller
 public class ES_BoardController {
-	@Autowired ES_BoardSeriveImpl service;
+	@Autowired BoardDAO_ES dao_es;
 	
 	@RequestMapping("/esDetail")
 	public String es_detail(int id) {
-		service.es_board_detail(id);
+		dao_es.es_board_detail(id);
 		
 		return "";
 	}
 	
 	@RequestMapping("/esUpdate")
-	public String es_update(ES_BoardVO vo, Model model, HttpSession session, MultipartFile file, String attach) {
-		service.es_board_update(vo);
+	public String es_update(BoardVO vo, Model model, HttpSession session, MultipartFile file, String attach) {
+		dao_es.es_board_update(vo);
 		
 		// 원 글에 첨부 파일이 있는지...
-				ES_BoardVO board = service.es_board_detail(vo.getNo());
+				BoardVO board = dao_es.es_board_detail(vo.getNo());
 				String uuid = session.getServletContext().getRealPath("resources") + "/" + board.getFilepath();
 				
 				// 파일을 첨부하지 않은 경우
@@ -67,11 +65,8 @@ public class ES_BoardController {
 						if ( f.exists() ) f.delete();	// 파일이 존재하면 파일 삭제
 					}
 				}
-				
-				
 				// 화면에서 수정한 정보들을 DB에서 저장한 후 상세화면 연결
-				service.es_board_update(vo);
-				
+				dao_es.es_board_update(vo);
 				model.addAttribute("uri", "esUpdate");
 				model.addAttribute("id", vo.getNo());
 		
@@ -80,9 +75,7 @@ public class ES_BoardController {
 	
 	@RequestMapping("/esList")
 	public void es_detail_list(HttpServletRequest req, Model model, HttpServletResponse res) {
-		
-		List<ES_BoardVO> dtos = service.es_board_list();
-		
+		List<BoardVO> dtos = dao_es.es_board_list();
 		Gson gson = new Gson();
 		String json = gson.toJson(dtos);
 		PrintWriter out;

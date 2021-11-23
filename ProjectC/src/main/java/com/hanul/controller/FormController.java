@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import gw_member.MemberVO_GW;
+import member.MemberVO;
 
 @Controller
 public class FormController {
@@ -77,7 +77,7 @@ public class FormController {
 	 * return "member/info"; }
 	 */	
 	@RequestMapping("joinDataObject")
-	public String members(MemberVO_GW vo, Model model) {
+	public String members(MemberVO vo, Model model) {
 		model.addAttribute("member", vo);
 		model.addAttribute("method", "데이터객체(VO)방식");
 		return "member/info";

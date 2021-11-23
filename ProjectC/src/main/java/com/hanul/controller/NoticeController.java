@@ -9,15 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jy_notice.NoticePage;
-import jy_notice.NoticeServiceImpl;
-import jy_notice.NoticeVO;
-import mj_member.MemberVO;
+import member.MemberVO;
+import notice.NoticeDAO_MJ;
+import notice.NoticePage;
+import notice.NoticeVO;
 
 @Controller
 public class NoticeController {
 	
-	@Autowired private NoticeServiceImpl service;
+	@Autowired private NoticeDAO_MJ service;
 	@Autowired private NoticePage page;
 	
 	// 공지사항 글 수정 저장처리 요청
@@ -98,12 +98,10 @@ public class NoticeController {
 			, @RequestParam (defaultValue = "1") int curPage
 			, @RequestParam (defaultValue = "list") String viewType
 			, Model model) {
-		
 		session.setAttribute("category", "no");
 		
 		// DB에서 공지사항 정보를 조회해와 목록화면에 출력
 		page.setCurPage(curPage);	// 현재 페이지를 담음
-		
 		page.setSearch(search);		// 검색 조건
 		page.setKeyword(keyword);	// 검색어
 		page.setPageList(pageList);	// 페이지당 보여질 글 목록 수

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -15,27 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 
-import mook.MBoardServiceImpl;
-import mook.MBoardVO;
+import board.BoardVO;
+import board.BoardDAO_GM;
 
 @Controller
 public class MookController {
-	@Autowired private MBoardServiceImpl service;
+	@Autowired private BoardDAO_GM dao_gm;
 	
 	@RequestMapping("/all")
 	public void listAll(HttpSession session, Model model, HttpServletResponse response) {
-		
-//		session.setAttribute("category", "cu"); 
-		// 카테고리 어트리뷰트에 cu 를 설정
-		
-//		List<CustomerVO> list = service.customer_list();
-		
-//		for (CustomerVO vo : list ) {
-//			System.out.println(vo.getName());
-//		}
-		
-//		model.addAttribute("list", list);
-		List<MBoardVO> list = service.board_all();
+		List<BoardVO> list = dao_gm.board_all();
 //		model.addAttribute("all", service.board_all());
 		
 		Gson gson = new Gson();
@@ -55,17 +43,9 @@ public class MookController {
 	@RequestMapping("/musical")
 	public void listMusical(HttpSession session, Model model, HttpServletResponse response) {
 	
-//		session.setAttribute("category", "cu"); 
-		// 카테고리 어트리뷰트에 cu 를 설정
-		
-//		List<CustomerVO> list = service.customer_list();
-		
-//		for (CustomerVO vo : list ) {
-//			System.out.println(vo.getName());
-//		}
-		
+	
 //		model.addAttribute("list", list);
-		List<MBoardVO> list = service.board_musical();
+		List<BoardVO> list = dao_gm.board_musical();
 //		model.addAttribute("all", service.board_all());
 		
 		Gson gson = new Gson();
@@ -95,7 +75,7 @@ public class MookController {
 //		}
 		
 //		model.addAttribute("list", list);
-		List<MBoardVO> list = service.board_opera();
+		List<BoardVO> list = dao_gm.board_opera();
 //		model.addAttribute("all", service.board_all());
 		
 		Gson gson = new Gson();
@@ -125,7 +105,7 @@ public class MookController {
 //		}
 		
 //		model.addAttribute("list", list);
-		List<MBoardVO> list = service.board_play();
+		List<BoardVO> list = dao_gm.board_play();
 //		model.addAttribute("all", service.board_all());
 		
 		Gson gson = new Gson();
@@ -155,7 +135,7 @@ public class MookController {
 //		}
 		
 //		model.addAttribute("list", list);
-		List<MBoardVO> list = service.board_exhibition();
+		List<BoardVO> list = dao_gm.board_exhibition();
 //		model.addAttribute("all", service.board_all());
 		
 		Gson gson = new Gson();
@@ -185,7 +165,7 @@ public class MookController {
 //		}
 		
 //		model.addAttribute("list", list);
-		List<MBoardVO> list = service.board_concert();
+		List<BoardVO> list = dao_gm.board_concert();
 //		model.addAttribute("all", service.board_all());
 		
 		Gson gson = new Gson();

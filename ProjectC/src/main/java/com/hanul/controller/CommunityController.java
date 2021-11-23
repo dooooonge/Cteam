@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import gm_community.CommunityCommentVO;
-import gm_community.CommunityPage;
-import gm_community.CommunityServiceImpl;
-import gm_community.CommunityVO;
-import mj_member.MemberVO;
+import member.MemberVO;
 import common.CommonService;
+import community.CommentVO;
+import community.CommunityDAO_MJ;
+import community.CommunityPage;
+import community.CommunityVO;
 
 @Controller
 public class CommunityController {
 	
-	@Autowired private CommunityServiceImpl service;
+	@Autowired private CommunityDAO_MJ commu_gm;
 	@Autowired private CommunityPage page;
 	@Autowired private CommonService common;
 	
@@ -32,7 +32,7 @@ public class CommunityController {
 	@RequestMapping ("/community/comment/list/{pno}")
 	public String comment_list(@PathVariable int pno, Model model) {
 		// 해당 글에 대한 댓글들을 DB에서 조회한다.
-		model.addAttribute("list", service.comment_list(pno) );
+		model.addAttribute("list", commu_gm.comment_list(pno) );
 		model.addAttribute("crlf", "\r\n");
 		model.addAttribute("lf", "\n");
 		return "community/comment/comment_list";
@@ -42,13 +42,13 @@ public class CommunityController {
 	// 커뮤니티 글에 대한 댓글 저장처리 요청
 	@ResponseBody
 	@RequestMapping ("/community/comment/regist")
-	public boolean comment_regist(CommunityCommentVO vo, HttpSession session) {
+	public boolean comment_regist(CommentVO vo, HttpSession session) {
 		// 작성자의 경우 member의 id 값을 담아야 하므로 로그인 정보 확인
 		MemberVO member = (MemberVO) session.getAttribute("loginInfo");
 		vo.setWriter(member.getEmail());
 		
 		// 화면에서 입력한 댓글 정보를 DB에 저장한 후 저장 여부를 반환
-		return service.comment_insert(vo) == 1 ? true : false;
+		return commu_gm.comment_insert(vo) == 1 ? true : false;
 		// 반환결과가 1 이면 true 아니면 false
 	}
 	
@@ -59,7 +59,7 @@ public class CommunityController {
 			, HttpSession session, MultipartFile file, String attach) {
 		
 		// 원 글에 첨부 파일이 있는지...
-		CommunityVO community = service.community_detail(vo.getId());
+		CommunityVO community = commu_gm.community_detail(vo.getId());
 		String uuid = session.getServletContext().getRealPath("resources") + "/" + community.getFilepath1();
 		
 		// 파일을 첨부하지 않은 경우
@@ -91,7 +91,7 @@ public class CommunityController {
 		
 		
 		// 화면에서 수정한 정보들을 DB에서 저장한 후 상세화면 연결
-		service.community_update(vo);
+		commu_gm.community_update(vo);
 		
 		model.addAttribute("uri", "detail.co");
 		model.addAttribute("id", vo.getId());
@@ -102,7 +102,7 @@ public class CommunityController {
 	@RequestMapping ("/modify.co")
 	public String modify(int id, Model model) {
 		// 해당 글의 정보를 DB에서 조회해와 수정화면에 출력
-		model.addAttribute("vo", service.community_detail(id)) ;
+		model.addAttribute("vo", commu_gm.community_detail(id)) ;
 		return "community/modify";
 	}
 	
@@ -110,7 +110,7 @@ public class CommunityController {
 	@RequestMapping ("/delete.co")
 	public String delete (int id, HttpSession session, Model model) {
 		// 첨부 파일이 있는 글에 대해서는 해당 파일을 서버의 물리적인 영역에서 삭제
-		CommunityVO vo = service.community_detail(id);
+		CommunityVO vo = commu_gm.community_detail(id);
 		if (vo.getFilename1() != null) {
 			File file = new File( session.getServletContext().getRealPath("resources")
 					+ "/" + vo.getFilepath1() );
@@ -118,7 +118,7 @@ public class CommunityController {
 		}
 		
 		// 해당 커뮤니티 글을 DB에서 삭제한 후 목록화면으로 연결
-		service.community_delete(id);
+		commu_gm.community_delete(id);
 	//	return "redirect:list.co";
 		
 		model.addAttribute("uri", "list.co");
@@ -132,7 +132,7 @@ public class CommunityController {
 	public void download(int id, HttpSession session, HttpServletResponse response ) {
 		
 		// 해당 글의 첨부파일 정보를 DB에서 조회해와 해당 파일을 서버로부터 다운로드 함.
-		CommunityVO vo = service.community_detail(id);
+		CommunityVO vo = commu_gm.community_detail(id);
 		common.fileDownload(vo.getFilename1(), vo.getFilepath1(), session, response);		
 	}
 	
@@ -142,10 +142,10 @@ public class CommunityController {
 	public String detail(int id, Model model) {
 		
 		// 조회수 증가 처리
-		service.community_read(id);
+		commu_gm.community_read(id);
 		
 		// 해당 커뮤니티 글을 DB에서 조회해와 상세화면에 출력
-		model.addAttribute("vo", service.community_detail(id) );
+		model.addAttribute("vo", commu_gm.community_detail(id) );
 		model.addAttribute("crlf", "\r\n");
 		model.addAttribute("page", page);
 		return "community/detail";
@@ -166,7 +166,7 @@ public class CommunityController {
 		vo.setWriter( member.getEmail() );
 		
 		// 화면에서 입력한 정보를 DB에 신규 저장한 후 목록화면 연결
-		service.community_insert(vo);
+		commu_gm.community_insert(vo);
 		return "redirect:list.co";
 	}
 	
@@ -194,7 +194,7 @@ public class CommunityController {
 		page.setKeyword(keyword);	// 검색어
 		page.setPageList(pageList);	// 페이지당 보여질 글 목록 수
 		page.setViewType(viewType);	// 게시판 형태
-		model.addAttribute("page", service.community_list(page) );
+		model.addAttribute("page", commu_gm.community_list(page) );
 		return "community/list";
 	}
 }

@@ -21,21 +21,21 @@ import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 
-import board.BoardService_GW;
-import board.BoardVO_GW;
-import gw_member.MemberServiceImpl_GW;
-import gw_member.MemberVO_GW;
+import board.BoardDAO_GW;
+import board.BoardVO;
+import member.MemberDAO_GW;
+import member.MemberVO;
 
 @Controller
 public class AnController_GW {
 	
-	@Autowired MemberServiceImpl_GW service;
-	@Autowired BoardService_GW board;
+	@Autowired MemberDAO_GW member_gw;
+	@Autowired BoardDAO_GW board_gw;
 	
 	@RequestMapping("/anIdCheck")
 	public void anIdCheck(String email, HttpServletResponse response) {
 		System.out.println("emailCheck");
-		int chk = service.member_id_chk(email);
+		int chk = member_gw.member_id_chk(email);
 		
 		
 		PrintWriter out;
@@ -68,7 +68,7 @@ public class AnController_GW {
 				+ nickname + ", " + idnumber + ", " + address );
 		//MultipartRequest multi1 = (MultipartRequest)req;
 		//MultipartFile file1 = multi1.getFile("filename");
-		MemberVO_GW vo = new MemberVO_GW();
+		MemberVO vo = new MemberVO();
 		vo.setEmail(email);
 		vo.setPassword(password);
 		vo.setAddress(address);
@@ -100,7 +100,7 @@ public class AnController_GW {
 			}
 		}}
 		vo.setFilepath(realImgPath+filename);
-		int succ = service.member_join(vo);
+		int succ = member_gw.member_join(vo);
 		
 		PrintWriter out;
 		
@@ -132,7 +132,7 @@ public class AnController_GW {
 		map.put("email", email);
 		map.put("pw", pw);
 		
-		MemberVO_GW vo =  service.member_login(map);
+		MemberVO vo =  member_gw.member_login(map);
 		System.out.println(vo.getEmail()+"조회 완료");
 		
 		Gson gson = new Gson();
@@ -157,7 +157,7 @@ public class AnController_GW {
 	@RequestMapping(value="/anSelectMember", method = {RequestMethod.GET, RequestMethod.POST})
 	public void anSelectMember(HttpServletRequest req, Model model, HttpServletResponse response) {
 		System.out.println("anSelectMember");
-		List<MemberVO_GW> dtos = service.member_list();
+		List<MemberVO> dtos = member_gw.member_list();
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(dtos);
@@ -176,7 +176,7 @@ public class AnController_GW {
 	@RequestMapping("/anBoardList")
 	public void anSelectBoardList(HttpServletResponse response) {
 		System.out.println("anBoardList");
-		List<BoardVO_GW> list = board.board_list();
+		List<BoardVO> list = board_gw.board_list();
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(list);

@@ -9,25 +9,23 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BoardDAO_GW implements BoardService_GW{
+public class BoardDAO_GW {
 	
 	@Autowired @Qualifier("cteam")SqlSession sql;
 
-	public int board_insert(BoardVO_GW dto) {
+	public int board_insert(BoardVO dto) {
 		
 		
-		return sql.insert("gw_board.mapper.board_insert", dto);
+		return sql.insert("board.mapper.board_insert_gw", dto);
 	}
 
-	@Override
 	public void board_clear() {
-		sql.delete("gw_board.mapper.board_clear");		
+		sql.delete("board.mapper.board_clear_gw");		
 	}
 	
-	@Override
-	public List<BoardVO_GW> board_list() {
+	public List<BoardVO> board_list() {
 		
-		return sql.selectList("gw_board.mapper.board_list_gw");
+		return sql.selectList("board.mapper.board_list_gw");
 		
 	}
 	
