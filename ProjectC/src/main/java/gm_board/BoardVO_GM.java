@@ -1,8 +1,8 @@
-package mook;
+package gm_board;
 
 import java.io.Serializable;
 
-public class MBoardVO implements Serializable {
+public class BoardVO_GM implements Serializable {
 	private String eventnm,	opar, eventco, eventstartdate, eventenddate, eventstarttime, eventendtime, chrgeinfo, mnnst, auspcinstt, phonenumber, suprtinstt, seatnumber, admfee,
 					entncage, dscntinfo, atpn, homepageurl, advantkinfo, prkplceyn, rdnmadr, lnmadr, latitude, longitude, referencedate, filename, filepath, postdate, writer;
 	private int no, post_able, readcnt, on_offline ;

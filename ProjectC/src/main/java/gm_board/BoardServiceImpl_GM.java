@@ -1,22 +1,24 @@
-package mook;
+package gm_board;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import gm_board.BoardDAO_GM;
 	
 @Service
-public class MBoardServiceImpl implements MBoardService {
+public class BoardServiceImpl_GM implements BoardService_GM {
 
-	@Autowired private MBoardDAO dao;
+	@Autowired private BoardDAO_GM dao;
 
 	@Override
-	public List<MBoardVO> board_all() {
+	public List<BoardVO_GM> board_all() {
 		return dao.board_all();
 	}
 
 	@Override
-	public void board_insert(MBoardVO vo) {
+	public void board_insert(BoardVO_GM vo) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -28,39 +30,39 @@ public class MBoardServiceImpl implements MBoardService {
 	}
 
 	@Override
-	public void board_update(MBoardVO vo) {
+	public void board_update(BoardVO_GM vo) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public MBoardVO board_detail(MBoardVO vo) {
+	public BoardVO_GM board_detail(BoardVO_GM vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<MBoardVO> board_musical() {
+	public List<BoardVO_GM> board_musical() {
 		return dao.board_musical();
 	}
 
 	@Override
-	public List<MBoardVO> board_opera() {
+	public List<BoardVO_GM> board_opera() {
 		return dao.board_opera();
 	}
 
 	@Override
-	public List<MBoardVO> board_play() {
+	public List<BoardVO_GM> board_play() {
 		return dao.board_play();
 	}
 
 	@Override
-	public List<MBoardVO> board_exhibition() {
+	public List<BoardVO_GM> board_exhibition() {
 		return dao.board_exhibition();
 	}
 
 	@Override
-	public List<MBoardVO> board_concert() {
+	public List<BoardVO_GM> board_concert() {
 		return dao.board_concert();
 	}
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mook.mapper">
+	<select id="all" resultType="mook.MBoardVO">
+		select * 
+		from board
+		order by eventnm
+	</select>
+	
+	<select id="musical" resultType="mook.MBoardVO">
+		select * 
+		from board
+		where eventco like '%뮤지컬%'
+		order by eventnm
+	</select>
+
+	<select id="opera" resultType="mook.MBoardVO">
+		select * 
+		from board
+		where eventco like '%오페라%'
+		order by eventnm
+	</select>
+	
+	<select id="play" resultType="mook.MBoardVO">
+		select * 
+		from board
+		where eventco like '%연극%'
+		or eventco like '%공연%'
+		or eventco like '%극%'
+		or eventco like '%발레%'
+		order by eventnm
+	</select>
+	
+	<select id="exhibition" resultType="mook.MBoardVO">
+		select * 
+		from board
+		where eventco like '%전시회%'
+		or eventco like '%기념%'
+		or eventco like '%전%'
+		or eventco like '%화%'
+		or eventco like '%서예%'
+		order by eventnm
+	</select>
+	
+	<select id="concert" resultType="mook.MBoardVO">
+		select * 
+		from board
+		where eventco like '%음악회%'
+		or eventco like '%음악%' 
+		or eventco like '%음%'
+		or eventco like  '%연주%'
+		or eventco like  '%악%'
+		or eventco like  '%가요%'
+		or eventco like  '%클래식%'
+		or eventco like  '%재즈%'
+		order by eventnm
+	</select>
+	
+</mapper>
