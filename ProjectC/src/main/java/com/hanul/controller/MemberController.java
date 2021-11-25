@@ -26,6 +26,43 @@ public class MemberController {
    
    private String naver_client_id = "jpLk2cBAgCpN07Z9Qx4B";
    private String kakao_client_id = "70abb9970adb1cad341591555e9378d4";
+   
+	@RequestMapping("/post_qna.my")
+	public String qna() {
+		return "member/post_qna";
+	}
+	
+	@RequestMapping("/post_info.my")
+	public String info() {
+		return "member/post_info";
+	}
+	
+	
+	//정보수정 클릭 후 비밀번호 확인하기
+	@RequestMapping("/confirm.my")
+	public String confirm() {
+		return "member/confirm";
+	}
+
+	//정보 수정화면 요청
+	@RequestMapping("/modify.my")
+	public String modify() {
+		return "member/modify";
+	}
+	
+	//회원정보 띄워주기
+	@RequestMapping("/detail.my")
+	public String detail() {
+		return "member/member_detail";
+	}
+		
+	
+	//마이페이지 화면 요청
+	@RequestMapping("/list.my" )
+	public String list() {
+//		return "member/mypage";
+		return "member/mypage";
+	}
       
    //회원 정보 수정 후 저장
    @RequestMapping("/update.my")
